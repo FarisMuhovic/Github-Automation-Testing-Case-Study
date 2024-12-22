@@ -78,53 +78,46 @@ public class RepositoryTests extends BaseClass {
         loginPage.clickSignIn();
 
         driver.get(REPOS_URL);
-        WebElement firstRepo = driver.findElement(By.cssSelector("#user-repositories-list > ul > li:first-child a"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement firstRepo = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#user-repositories-list > ul > li:first-child a")));
         firstRepo.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement settingsTab = wait.until(ExpectedConditions.elementToBeClickable(By.id("settings-tab")));
-
         settingsTab.click();
-        Thread.sleep(2500);
-        WebElement deleteButton = driver.findElement(By.id("dialog-show-repo-delete-menu-dialog"));
+
+        WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("dialog-show-repo-delete-menu-dialog")));
         deleteButton.click();
-        Thread.sleep(2500);
+        Thread.sleep(500);
 
-        WebElement proceedDelete = driver.findElement(By.id("repo-delete-proceed-button"));
+        WebElement proceedDelete = wait.until(ExpectedConditions.elementToBeClickable(By.id("repo-delete-proceed-button")));
         proceedDelete.click();
-        Thread.sleep(2500);
+        Thread.sleep(500);
 
-        WebElement proceedDeleteRerender = driver.findElement(By.id("repo-delete-proceed-button"));
+        WebElement proceedDeleteRerender = wait.until(ExpectedConditions.elementToBeClickable(By.id("repo-delete-proceed-button")));
         proceedDeleteRerender.click();
-        Thread.sleep(2500);
+        Thread.sleep(500);
 
-
-        WebElement confirmationLabel = driver.findElement(By.xpath("//label[contains(text(), 'To confirm, type')]"));
+        WebElement confirmationLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(), 'To confirm, type')]")));
         String repoName = confirmationLabel.getText().split("\"")[1];  // Extract the repository name from the label
 
-        Thread.sleep(2500);
-
-        WebElement inputField = driver.findElement(By.id("verification_field"));
+        WebElement inputField = wait.until(ExpectedConditions.elementToBeClickable(By.id("verification_field")));
         inputField.sendKeys(repoName);
 
-        // Step 3: Wait for the "Delete this repository" button to become enabled
-        WebDriverWait waitR = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement deleteButtonR = waitR.until(ExpectedConditions.elementToBeClickable(By.id("repo-delete-proceed-button")));
-
+        WebElement deleteButtonR = wait.until(ExpectedConditions.elementToBeClickable(By.id("repo-delete-proceed-button")));
         deleteButtonR.click();
 
-        Thread.sleep(2000);
-        WebDriverWait waittt = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement flashMessage = waittt.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".flash-notice .js-flash-alert")));
+        WebElement flashMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".flash-notice .js-flash-alert")));
         String messageText = flashMessage.getText();
 
-        System.out.println(messageText);
+        assertTrue(messageText.contains("was successfully deleted"), "Expected successful deletion message, but got: " + messageText);
+
         if (messageText.contains("was successfully deleted")) {
-            System.out.println("Repository successfully deleted: ");
+            System.out.println(messageText);
         } else {
             System.out.println("Unexpected message:");
         }
-
     }
+
 
 }

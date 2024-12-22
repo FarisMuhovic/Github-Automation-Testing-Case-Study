@@ -22,9 +22,9 @@ public class LoginTests extends BaseClass {
     private static final String INVALID_EMAIL = ConfigReader.getProperty("invalidEmail");
     private static final String INVALID_PASSWORD = ConfigReader.getProperty("invalidPassword");
 
-    private void login(String username, String password) {
+    private void login(String email, String password) {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterEmail(username);
+        loginPage.enterEmail(email);
         loginPage.enterPassword(password);
         loginPage.clickSignIn();
     }

@@ -11,6 +11,7 @@ public class LoginPage {
     private final By signInButton = By.name("commit");
     private final By forgotPasswordLink = By.id("forgot-password");
     private final By createAccountLink = By.xpath("//a[@href='/signup?source=login']");
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -37,19 +38,8 @@ public class LoginPage {
         driver.findElement(createAccountLink).click();
     }
 
-    public By getEmailField() {
-        return emailField;
-    }
-
     public By getPasswordField() {
         return passwordField;
     }
 
-    public By getSignInButton() {
-        return signInButton;
-    }
-
-    public By getCreateAccountLink() {
-        return createAccountLink;
-    }
 }

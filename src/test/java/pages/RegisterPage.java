@@ -8,7 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 public class RegisterPage {
     private final WebDriver driver;
 
-    // Locators for form fields
     private final By emailField = By.id("email");
     private final By usernameField = By.id("login");
     private final By passwordField = By.id("password");
@@ -24,38 +23,33 @@ public class RegisterPage {
         this.driver = driver;
     }
 
-
     public void enterEmail(String email) {
         WebElement emailElement = driver.findElement(emailField);
         emailElement.sendKeys(email);
-        loseFocus(emailElement);
+        loseFocus();
     }
 
     public void enterUsername(String username) {
         WebElement usernameElement = driver.findElement(usernameField);
         usernameElement.sendKeys(username);
-        loseFocus(usernameElement);
+        loseFocus();
     }
 
     public void enterPassword(String password) {
         WebElement passwordElement = driver.findElement(passwordField);
         passwordElement.sendKeys(password);
-        loseFocus(passwordElement);
+        loseFocus();
     }
 
     public void clickContinue() {
         driver.findElement(continueButton).click();
     }
 
-    private void loseFocus(WebElement element) {
-        // Create an Actions object to simulate mouse movement
+    private void loseFocus() {
         Actions actions = new Actions(driver);
         actions.moveByOffset(0, 0).click().perform();
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
 
     public By getEmailError() {
         return emailError;

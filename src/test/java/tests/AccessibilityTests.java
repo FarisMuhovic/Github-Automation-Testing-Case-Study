@@ -6,16 +6,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.ConfigReader;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AccessibilityTests extends BaseClass {
+    private static final String LOGIN_URL = ConfigReader.getProperty("loginUrl");
 
     @Test
     public void testLinksHaveDescriptiveText() {
-        driver.get("https://github.com/login");
+        driver.get(LOGIN_URL);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("a")));
@@ -34,7 +36,7 @@ public class AccessibilityTests extends BaseClass {
 
     @Test
     public void testFormLabelsOnLoginPage() {
-        driver.get("https://github.com/login");
+        driver.get(LOGIN_URL);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_field")));
@@ -48,7 +50,7 @@ public class AccessibilityTests extends BaseClass {
 
     @Test
     public void testKeyboardNavigationOnLoginPage() {
-        driver.get("https://github.com/login");
+        driver.get(LOGIN_URL);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_field")));

@@ -3,12 +3,14 @@ package tests;
 import base.BaseClass;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.ConfigReader;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HttpsEnforcementTests extends BaseClass {
+    private static final String LOGIN_URL = ConfigReader.getProperty("loginUrl");
 
     @Test
     public void testRedirectToHttps() {
@@ -20,7 +22,7 @@ public class HttpsEnforcementTests extends BaseClass {
 
     @Test
     public void testSecurePageHttps() {
-        driver.get("https://github.com/login");
+        driver.get(LOGIN_URL);
         String currentUrl = driver.getCurrentUrl();
         assertTrue(currentUrl.startsWith("https://"), "Login page is not served over HTTPS");
         System.out.println("Test Passed: Login page is served over HTTPS");

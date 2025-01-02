@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.DevTools;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class BaseClass {
     protected static ChromeOptions options;
     protected WebDriver driver;
+    protected DevTools devTools;
 
     @BeforeAll
     static void setupClass() {
@@ -40,6 +42,7 @@ public class BaseClass {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
     @AfterEach

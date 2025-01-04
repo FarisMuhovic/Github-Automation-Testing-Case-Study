@@ -38,7 +38,7 @@ public class RepositoryTests extends BaseClass {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(driver -> driver.getPageSource().contains("New"));
 
-        RepositoryPage repositoryPage = new RepositoryPage(driver, loginPage);
+        RepositoryPage repositoryPage = new RepositoryPage(driver);
         repositoryPage.clickNewRepoButton();
         String repoName = "TestRepo" + Math.floor(Math.random() * 10000);
         repositoryPage.enterRepoName(repoName);

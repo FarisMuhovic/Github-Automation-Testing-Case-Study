@@ -5,16 +5,14 @@ import org.openqa.selenium.WebDriver;
 
 public class RepositoryPage {
     private final WebDriver driver;
-    public final LoginPage loginPage;
 
     private final By newRepoButton = By.cssSelector("a[href='/new']");
     private final By repoNameInput = By.cssSelector("[data-testid='repository-name-input']");
     private final By repoDescriptionInput = By.name("Description");
     private final By repoCreateButton = By.cssSelector("button[type='submit'] span.prc-Button-Label-pTQ3x");
 
-    public RepositoryPage(WebDriver driver, LoginPage loginPage) {
+    public RepositoryPage(WebDriver driver) {
         this.driver = driver;
-        this.loginPage = loginPage;
     }
 
     public void clickNewRepoButton() {

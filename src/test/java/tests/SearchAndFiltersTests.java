@@ -23,7 +23,7 @@ public class SearchAndFiltersTests extends BaseClass {
 
     @Test
     @Order(1)
-    public void testSearchForPublicRepository() throws InterruptedException {
+    public void testSearchForPublicRepository() {
         driver.get(SEARCH_URL);
 
         SearchAndFiltersPage searchAndFiltersPage = new SearchAndFiltersPage(driver);

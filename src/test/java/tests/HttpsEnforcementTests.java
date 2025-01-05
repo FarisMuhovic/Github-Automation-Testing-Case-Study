@@ -17,7 +17,6 @@ public class HttpsEnforcementTests extends BaseClass {
         driver.get("http://github.com");
         String currentUrl = driver.getCurrentUrl();
         assertTrue(currentUrl.startsWith("https://"), "Application does not redirect to HTTPS");
-        System.out.println("Test Passed: Application redirects HTTPS.");
     }
 
     @Test
@@ -25,7 +24,6 @@ public class HttpsEnforcementTests extends BaseClass {
         driver.get(LOGIN_URL);
         String currentUrl = driver.getCurrentUrl();
         assertTrue(currentUrl.startsWith("https://"), "Login page is not served over HTTPS");
-        System.out.println("Test Passed: Login page is served over HTTPS");
     }
 
     @Test
@@ -39,6 +37,5 @@ public class HttpsEnforcementTests extends BaseClass {
         );
 
         assertTrue(isValid, "SSL certificate is not valid.");
-        System.out.println("Test Passed: SSL certificate is valid.");
     }
 }

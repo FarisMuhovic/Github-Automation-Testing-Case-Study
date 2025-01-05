@@ -35,7 +35,6 @@ public class SearchAndFiltersTests extends BaseClass {
         WebElement repos = driver.findElement(By.cssSelector(".Box-sc-g0xbh4-0 .gZKkEq > div:first-child"));
         String elementText = repos.getText();
         assertTrue(elementText.contains("Selenium"), "The text does not contain 'Selenium'.");
-        System.out.println("Test Passed: Repositories related to 'Selenium' are displayed.");
     }
 
     @Test
@@ -52,7 +51,6 @@ public class SearchAndFiltersTests extends BaseClass {
         WebElement repos = driver.findElement(By.cssSelector(".Box-sc-g0xbh4-0 .gZKkEq > div:first-child"));
         String elementText = repos.getText();
         assertTrue(elementText.contains("Python"), "The text does not contain 'Python'.");
-        System.out.println("Test Passed: Repositories related to 'Python' are displayed.");
     }
 
     @Test
@@ -79,9 +77,6 @@ public class SearchAndFiltersTests extends BaseClass {
 
         // Assert that the actual star counts are in descending order
         assertTrue(starCounts.equals(sortedStarCounts), "Star counts are not in descending order.");
-        System.out.println("Star counts are in descending order.");
-        System.out.println(sortedStarCounts);
-        System.out.println(starCounts);
     }
 
     private double parseStarsCount(String starsCountText) {

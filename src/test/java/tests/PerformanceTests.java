@@ -17,7 +17,6 @@ public class PerformanceTests extends BaseClass {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         long loadTime = (Long) js.executeScript(
                 "return performance.timing.loadEventEnd - performance.timing.navigationStart;");
-        System.out.println("Page load time: " + loadTime + "ms");
         assertTrue(loadTime < 3000, "Page didn't load within 3 seconds");
         System.out.println("Page load time test passed, It is: " + loadTime + "ms");
     }

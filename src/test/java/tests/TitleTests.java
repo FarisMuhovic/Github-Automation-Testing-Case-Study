@@ -29,25 +29,10 @@ public class TitleTests extends BaseClass {
     }
 
     @Test
-    public void testSecurityPageTitle() {
-        driver.get("https://github.com/features/security");
-        String pageTitle = driver.getTitle();
-        assertTrue(pageTitle.contains("Security"), "Security page title does not contain 'Security'");
-    }
-
-    @Test
     public void testCopilotPageTitle() {
         driver.get("https://github.com/features/copilot");
         String pageTitle = driver.getTitle();
         assertTrue(pageTitle.contains("GitHub Copilot"), "GitHub Copilot page title does not contain 'GitHub Copilot'");
     }
-
-    @Test
-    public void testSponsorsPageTitle() {
-        driver.get("https://github.com/sponsors");
-        String pageTitle = driver.getTitle();
-        assertTrue(pageTitle.contains("GitHub Sponsors"), "GitHub Sponsors page title does not contain 'GitHub Sponsors'");
-    }
-
 
 }

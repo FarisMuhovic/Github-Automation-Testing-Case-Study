@@ -3,6 +3,7 @@ package tests;
 import base.BaseClass;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,15 +35,14 @@ public class LoginTests extends BaseClass {
         driver.get(LOGIN_URL);
         login(VALID_EMAIL, VALID_PASSWORD);
         assertTrue(driver.getPageSource().contains("Dashboard"), "Login failed!");
-        System.out.println("Test Passed: Login was successful.");
     }
 
     @Test
     public void testInvalidLogin() {
         driver.get(LOGIN_URL);
         login(INVALID_EMAIL, INVALID_PASSWORD);
-        assertTrue(driver.getPageSource().contains("Incorrect username or password."), "Expected error message 'Incorrect username or password.' was not found on the page.");
-        System.out.println("Test Passed: Expected error message found.");
+        assertTrue(driver.getPageSource().contains("Incorrect username or password."),
+                "Expected error message 'Incorrect username or password.' was not found on the page.");
     }
 
     @Test
@@ -52,7 +52,6 @@ public class LoginTests extends BaseClass {
         WebElement passwordField = driver.findElement(loginPage.getPasswordField());
         String inputType = passwordField.getDomAttribute("type");
         assertEquals("password", inputType, "Password field should mask the input.");
-        System.out.println("Test Passed: Password field is masked.");
     }
 
 
@@ -63,7 +62,6 @@ public class LoginTests extends BaseClass {
         loginPage.clickForgotPasswordLink();
         String currentUrl = driver.getCurrentUrl();
         assertEquals(FORGOT_PASSWORD_URL, currentUrl, "The Forgot Password redirection failed.");
-        System.out.println("Test Passed: Correct redirection to the Forgot Password page.");
     }
 
     @Test
@@ -78,7 +76,6 @@ public class LoginTests extends BaseClass {
         String currentUrl = driver.getCurrentUrl();
 
         assertEquals(CREATE_ACCOUNT_URL, currentUrl, "The Create Account redirection failed.");
-        System.out.println("Test Passed: Correct redirection to the Create Account page.");
     }
 
     @Test
@@ -86,11 +83,11 @@ public class LoginTests extends BaseClass {
         driver.get(LOGIN_URL);
         login("nonexistent@domainf.fdcom", VALID_PASSWORD);
         assertTrue(driver.getPageSource().contains("Incorrect username or password."), "Error message not shown for unregistered email.");
-        System.out.println("Test Passed: Non-registered email is correctly handled.");
     }
 
     @Test
     public void testLogout() {
+        driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.get(LOGIN_URL);
         login(VALID_EMAIL, VALID_PASSWORD);
 
@@ -106,7 +103,6 @@ public class LoginTests extends BaseClass {
         signOutFromAccount.click();
 
         assertFalse(driver.getPageSource().contains("Dashboard"), "Logout failed. User not redirected to login page");
-        System.out.println("Test Passed: User logged out successfully.");
     }
 
 

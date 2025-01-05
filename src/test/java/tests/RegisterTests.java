@@ -33,12 +33,11 @@ public class RegisterTests extends BaseClass {
     @Test
     public void testValidRegistration() {
         driver.get(REGISTER_URL);
-        register(VALID_EMAIL, VALID_USERNAME, VALID_PASSWORD);
+        register(VALID_EMAIL, VALID_USERNAME, VALID_PASSWORD); // Make sure to change the data in configreader to be unique for username and email
         RegisterPage registerPage = new RegisterPage(driver);
         WebElement captcha = driver.findElement(registerPage.getCaptchaPage());
         // CAPTCHA will prevent the form from being submitted, so we stop before it.
         assertNotNull(captcha, "Terms of Service text not displayed.");
-        System.out.println("Test Passed: Valid registration form passed validation, Captcha detected successfully.");
     }
 
     @Test
@@ -51,7 +50,6 @@ public class RegisterTests extends BaseClass {
         WebElement emailError = wait.until(ExpectedConditions.visibilityOfElementLocated(registerPage.getEmailError()));
 
         assertNotNull(emailError, "Email error not displayed.");
-        System.out.println("Test Passed: Invalid email format handled.");
     }
 
     @Test
@@ -64,7 +62,6 @@ public class RegisterTests extends BaseClass {
         WebElement passwordError = wait.until(ExpectedConditions.visibilityOfElementLocated(registerPage.getPasswordError()));
 
         assertNotNull(passwordError, "Error message for weak password not shown.");
-        System.out.println("Test Passed: Weak password handled.");
     }
 
     @Test
@@ -77,6 +74,5 @@ public class RegisterTests extends BaseClass {
         WebElement usernameError = wait.until(ExpectedConditions.visibilityOfElementLocated(registerPage.getUsernameError()));
 
         assertNotNull(usernameError, "Error message for unavailable username not shown.");
-        System.out.println("Test Passed: Username not available handled.");
     }
 }

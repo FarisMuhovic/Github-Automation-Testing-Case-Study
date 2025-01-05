@@ -23,17 +23,14 @@ public class SecurityTests extends BaseClass {
     public void testSecureHeaders() {
         devTools = ((ChromeDriver) driver).getDevTools();
         devTools.createSession();
-        // Enable network interception to capture headers
         devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 
         devTools.addListener(Network.responseReceived(), response -> {
             var headers = response.getResponse().getHeaders();
 
-            // Check for Content-Security-Policy header
             assertTrue(headers.containsKey("content-security-policy"),
                     "Content-Security-Policy header should be present");
 
-            // Check for Strict-Transport-Security header
             assertTrue(headers.containsKey("strict-transport-security"),
                     "Strict-Transport-Security header should be present");
         });
@@ -45,7 +42,6 @@ public class SecurityTests extends BaseClass {
     public void testCsrfTokenPresence() {
         driver.get(LOGIN_URL);
 
-        // Locate the CSRF token in the login form
         WebElement csrfTokenElement = driver.findElement(By.name("authenticity_token"));
         String csrfToken = csrfTokenElement.getAttribute("value");
 
@@ -56,12 +52,10 @@ public class SecurityTests extends BaseClass {
     public void testSqlInjectionHandling() {
         driver.get(LOGIN_URL);
 
-        // Input SQL injection payload
         driver.findElement(By.name("login")).sendKeys("' OR 1=1 --");
         driver.findElement(By.name("password")).sendKeys("invalidPassword");
         driver.findElement(By.name("commit")).click();
 
-        // Verify that the login attempt failed
         WebElement errorMessage = driver.findElement(By.cssSelector("div.flash-error"));
         assertTrue(errorMessage.isDisplayed(), "Error message should be displayed for SQL injection attempts");
     }

@@ -30,7 +30,6 @@ public class AccessibilityTests extends BaseClass {
             }
 
             assertTrue(linkText != null && !linkText.trim().isEmpty(), "Link don't have descriptive text");
-            System.out.println("All links have descriptive text");
         }
     }
 
@@ -45,7 +44,6 @@ public class AccessibilityTests extends BaseClass {
         WebElement passwordLabel = driver.findElement(By.xpath("//label[@for='password']"));
 
         assertTrue(usernameLabel != null && passwordLabel != null, "Form fields don't have proper labels");
-        System.out.println("Form fields have proper labels.");
     }
 
     @Test
@@ -63,8 +61,6 @@ public class AccessibilityTests extends BaseClass {
 
         WebElement passwordField = driver.findElement(By.id("password"));
         assertTrue(passwordField.isDisplayed(), "Focus should be on the password field after tabbing");
-
-        driver.quit();
     }
 
 }

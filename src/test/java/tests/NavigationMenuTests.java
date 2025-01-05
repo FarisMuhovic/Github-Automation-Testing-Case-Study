@@ -26,10 +26,8 @@ public class NavigationMenuTests extends BaseClass {
         driver.get(BASE_URL);
         HomePage homePage = new HomePage(driver);
 
-        // Click on the "Sign in" link
         homePage.clickLogin();
 
-        // Verify navigation to the "Sign in" page
         assertTrue(driver.getCurrentUrl().contains("/login"), "Failed to navigate to Login page");
     }
 
@@ -50,10 +48,8 @@ public class NavigationMenuTests extends BaseClass {
         driver.get(BASE_URL);
         HomePage homePage = new HomePage(driver);
 
-        // Click on the "Try GitHub Copilot" link
         homePage.clickCopilot();
 
-        // Verify navigation to the Copilot page
         assertTrue(driver.getCurrentUrl().contains("/copilot"), "Failed to navigate to Copilot page");
     }
 }

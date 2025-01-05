@@ -15,53 +15,46 @@ public class FooterLinksTests extends BaseClass {
 
     @Test
     public void testNavigationToSubscribe() {
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get(BASE_URL);
-
-        // Scroll to the bottom of the page to ensure the footer is loaded
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        HomePage homePage = new HomePage(driver);
-        homePage.clickSubscribe();
-        assertTrue(driver.getCurrentUrl().contains("/newsletter"), "Failed to navigate to newsletter page");
+        navigateToFooterAndClick(() -> new HomePage(driver).clickSubscribe(), "/newsletter");
     }
 
     @Test
     public void testNavigationToCli() {
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get(BASE_URL);
-
-        // Scroll to the bottom of the page to ensure the footer is loaded
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        HomePage homePage = new HomePage(driver);
-        homePage.clickCli();
-        assertTrue(driver.getCurrentUrl().contains("cli"), "Failed to navigate to Cli page");
+        navigateToFooterAndClick(() -> new HomePage(driver).clickCli(), "cli");
     }
 
     @Test
     public void testNavigationToDesktop() {
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get(BASE_URL);
-
-        // Scroll to the bottom of the page to ensure the footer is loaded
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        HomePage homePage = new HomePage(driver);
-        homePage.clickDesktop();
-        assertTrue(driver.getCurrentUrl().contains("/desktop"), "Failed to navigate to Desktop page");
+        navigateToFooterAndClick(() -> new HomePage(driver).clickDesktop(), "/desktop");
     }
 
     @Test
     public void testNavigationToMobile() {
+        navigateToFooterAndClick(() -> new HomePage(driver).clickMobile(), "/mobile");
+    }
+
+    private void navigateToFooterAndClick(Runnable action, String expectedUrlFragment) {
+        setWindowSize();
+        navigateToBaseUrl();
+        scrollToFooter();
+        action.run();
+        assertCurrentUrlContains(expectedUrlFragment);
+    }
+
+    private void setWindowSize() {
         driver.manage().window().setSize(new Dimension(1920, 1080));
+    }
+
+    private void navigateToBaseUrl() {
         driver.get(BASE_URL);
+    }
 
-        // Scroll to the bottom of the page to ensure the footer is loaded
+    private void scrollToFooter() {
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
 
-        HomePage homePage = new HomePage(driver);
-        homePage.clickMobile();
-        assertTrue(driver.getCurrentUrl().contains("/mobile"), "Failed to navigate to mobile page");
+    private void assertCurrentUrlContains(String expectedUrlFragment) {
+        assertTrue(driver.getCurrentUrl().contains(expectedUrlFragment),
+                "Failed to navigate to the page containing: " + expectedUrlFragment);
     }
 }

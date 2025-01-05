@@ -41,7 +41,6 @@ public class RepositoryErrorHandlingTests extends BaseClass {
 
         boolean errorMessageExists = driver.getPageSource().contains("already exists on this account");
         assertTrue(errorMessageExists, "Error message for duplicate repository name is not displayed.");
-        System.out.println("Error message is displayed for duplicate repository name.");
     }
 
     @Test
@@ -62,6 +61,5 @@ public class RepositoryErrorHandlingTests extends BaseClass {
 
         boolean errorMessageExists = driver.getPageSource().contains("repository name must not be blank");
         assertTrue(errorMessageExists, "Error message for empty repository name is not displayed.");
-        System.out.println("Error message is displayed for empty repository name.");
     }
 }

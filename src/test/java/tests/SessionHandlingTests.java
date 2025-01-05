@@ -31,7 +31,6 @@ public class SessionHandlingTests extends BaseClass {
         driver.navigate().refresh();
 
         assertTrue(driver.getPageSource().contains("Dashboard"), "Session is not persistent after page reload.");
-        System.out.println("Session persists after page reload.");
     }
     @Test
     public void testSessionExpirationAfterLogout() {
@@ -56,6 +55,5 @@ public class SessionHandlingTests extends BaseClass {
         driver.get("https://github.com/dashboard");
 
         assertTrue(driver.getCurrentUrl().contains("https://github.com/login"), "User should be redirected to login page after logout");
-        System.out.println("Test passed: User is being redirected to login after accessing forbidden route.");
     }
 }

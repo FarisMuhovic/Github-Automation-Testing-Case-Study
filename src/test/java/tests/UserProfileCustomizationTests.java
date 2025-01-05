@@ -18,7 +18,7 @@ public class UserProfileCustomizationTests extends BaseClass {
     private static final String PROFILE_URL = ConfigReader.getProperty("profileUrl");
 
     @Test
-    public void testUpdateProfileInformation() {
+    public void testUpdateProfileInformation() throws InterruptedException {
         loginAndNavigateToProfile();
 
         ProfilePage profilePage = new ProfilePage(driver);
@@ -34,7 +34,7 @@ public class UserProfileCustomizationTests extends BaseClass {
         profilePage.saveChanges();
 
         waitForPageContains("Edit profile");
-
+        Thread.sleep(100);
         assertTrue(isTextPresentOnPage(updatedName), "Name is not present.");
         assertTrue(isTextPresentOnPage(updatedBio), "Bio is not present.");
     }
